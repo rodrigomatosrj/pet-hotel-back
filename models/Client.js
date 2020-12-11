@@ -8,6 +8,7 @@ const ClientSchema = new Schema({
 		city: { type: String, required: true },
 	},
 	pets_id: [{ type: Schema.Types.ObjectId, ref: "Pet" }],
+	user_id: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 const ClientModel = model("Client", ClientSchema);

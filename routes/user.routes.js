@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-//const passport = require("passport");
-//const jwt = require("jsonwebtoken");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
@@ -42,33 +42,25 @@ router.post("/signup", async (req, res) => {
 	}
 });
 
-// // Next é uma função que passa algum valor para o próximo handler de rotas (do Express) da cadeia de handlers
-// router.post("/login", (req, res, next) => {
-// 	passport.authenticate("local", (err, user, info) => {
-// 		// O objeto err só existe em caso de erro na comunicação com o Mongo
-// 		if (err) {
-// 			return res.status(500).json({ msg: err });
-// 		}
-
-// 		// Caso este email não esteja cadastrado ou a senha esteja divergente
-// 		if (!user || info) {
-// 			return res.status(401).json({ msg: info.message });
-// 		}
-
-// 		req.login(user, { session: false }, (err) => {
-// 			if (err) {
-// 				console.error(err);
-// 				return next(err);
-// 			}
-
-// 			const { name, email, _id } = user;
-// 			const userObj = { name, email, _id };
-// 			const token = jwt.sign({ user: userObj }, process.env.TOKEN_SIGN_SECRET);
-
-// 			return res.status(200).json({ user: userObj, token });
-// 		});
-// 	})(req, res, next);
-// });
+router.post("/login", (req, res, next) => {
+	passport.authenticate("local", (err, user, info) => {
+		if (err) {
+			return res.status(500).json({ msg: err });
+		}
+		if (!user || info) {
+			return res.status(401).json({ msg: info.message });
+		}
+		req.login(user, { session: false }, (err) => {
+			if (err) {
+				return next(err);
+			}
+			const { email, _id } = user;
+			const userObj = { email, _id };
+			const token = jwt.sign({ user: userObj }, process.env.TOKEN_SIGN_SECRET);
+			return res.status(200).json({ user: userObj, token });
+		});
+	})(req, res, next);
+});
 
 // router.get(
 // 	"/profile",
