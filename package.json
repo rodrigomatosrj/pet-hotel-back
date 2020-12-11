@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "app.js",
 	"scripts": {
-		"start": "nodemon app.js"
+		"start": "/home/ec2-user/.nvm/versions/node/v15.4.0/bin/node app.js"
 	},
 	"repository": {
 		"type": "git",
