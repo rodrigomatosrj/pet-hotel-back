@@ -19,7 +19,7 @@ const PetSchema = new Schema({
 			"https://images.vexels.com/media/users/3/155407/isolated/preview/84d636131360b843e427a4ff7061ae0a-avatar-de-gato-listrado-by-vexels.png",
 	},
 	recomendations: String,
-	client_id: { type: Schema.Types.ObjectId, ref: "Client" },
+	user_id: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 const PetModel = model("Pet", PetSchema);
