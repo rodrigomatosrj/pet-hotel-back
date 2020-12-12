@@ -4,14 +4,24 @@ const cors = require("cors");
 const db = require("./config/db.config");
 const passportConfig = require("./config/passport.config");
 const uploader = require("./config/cloudinary.config");
+const path = require("path");
 
 const app = express();
+const publicPath = path.join(__dirname, "public");
 
 app.use(express.json());
 app.use(cors());
 
 db();
 passportConfig(app);
+
+app.get("*", (req, res, next) => {
+	const hostUrl = req.originalUrl;
+	if (!hostUrl.includes("/api")) {
+		return res.sendFile(path.join(publicPath, "index.html"));
+	}
+	return next();
+});
 
 const userRouter = require("./routes/user.routes");
 app.use("/api/user", userRouter);
