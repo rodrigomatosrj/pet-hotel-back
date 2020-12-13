@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 const JWTStrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const User = require("../models/User");
 
@@ -50,7 +51,6 @@ function configurePassport(app) {
 		)
 	);
 
-
 	passport.use(
 		new GoogleStrategy(
 			{
@@ -58,23 +58,17 @@ function configurePassport(app) {
 				clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 				callbackURL: "/api/auth/google/callback",
 			},
-			(accessToken, refreshToken, profile, done) => {
-				console.log("Google account details:", profile);
-
-				User.findOne({ googleID: profile.id })
-					.then((user) => {
-						if (user) {
-							done(null, user);
-							return;
-						}
-
-						User.create({ googleID: profile.id })
-							.then((newUser) => {
-								done(null, newUser);
-							})
-							.catch((err) => done(err)); // closes User.create()
-					})
-					.catch((err) => done(err)); // closes User.findOne()
+			async (accessToken, refreshToken, profile, done) => {
+				try {
+					const foundUser = User.findOne({ googleID: profile.id });
+					if (foundUser) {
+						return done(null, Founduser);
+					}
+					const newUser = User.create({ googleID: profile.id });
+					return done(null, newUser);
+				} catch (err) {
+					done(err);
+				}
 			}
 		)
 	);

@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./config/db.config");
 const passportConfig = require("./config/passport.config");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const uploader = require("./config/cloudinary.config");
 const path = require("path");
 
@@ -37,7 +36,7 @@ const bookingRouter = require("./routes/booking.routes");
 app.use("/api/booking", bookingRouter);
 
 const authRouter = require("./routes/auth.routes");
-app.use("/api/auth",authRouter);
+app.use("/api/auth", authRouter);
 
 const admAccommodationRouter = require("./routes/adm.accommodation.routes");
 app.use("/api/adm/accommodation", admAccommodationRouter);
