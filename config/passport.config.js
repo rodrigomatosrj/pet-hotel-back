@@ -60,11 +60,11 @@ function configurePassport(app) {
 			},
 			async (accessToken, refreshToken, profile, done) => {
 				try {
-					const foundUser = User.findOne({ googleID: profile.id });
+					const foundUser = await User.findOne({ googleID: profile.id });
 					if (foundUser) {
 						return done(null, foundUser);
 					}
-					const newUser = User.create({ googleID: profile.id });
+					const newUser = await User.create({ googleID: profile.id });
 					return done(null, newUser);
 				} catch (err) {
 					done(err);
