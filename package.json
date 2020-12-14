@@ -15,7 +15,7 @@
 	"bugs": {
 		"url": "https://github.com/rodrigomatosrj/IronHack-project3-backend/issues"
 	},
-	"homepage": "https://github.com/rodrigomatosrj/IronHack-project3-backend#readme",
+	"homepage": ".",
 	"dependencies": {
 		"axios": "^0.21.0",
 		"bcrypt": "^5.0.0",
