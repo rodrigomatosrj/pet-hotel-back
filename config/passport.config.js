@@ -62,7 +62,7 @@ function configurePassport(app) {
 				try {
 					const foundUser = User.findOne({ googleID: profile.id });
 					if (foundUser) {
-						return done(null, Founduser);
+						return done(null, foundUser);
 					}
 					const newUser = User.create({ googleID: profile.id });
 					return done(null, newUser);
