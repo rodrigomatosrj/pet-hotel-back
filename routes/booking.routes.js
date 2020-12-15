@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+const querystring = require("querystring");
 
 const Booking = require("../models/Booking");
 
@@ -9,6 +10,24 @@ router.get(
 	async (req, res) => {
 		try {
 			const result = await Booking.find({ user_id: req.user._id });
+			res
+				.status(200)
+				.json({ message: "This is a protected route", bookings: result });
+		} catch (err) {
+			return res.status(500).json({ msg: err });
+		}
+	}
+);
+
+router.get(
+	"/search",
+	passport.authenticate("jwt", { session: false }),
+	async (req, res) => {
+		try {
+			const result = await Booking.find({
+				start_date: { gte: req.query.startDate },
+				end_date: { lte: req.query.endDate },
+			});
 			res
 				.status(200)
 				.json({ message: "This is a protected route", bookings: result });

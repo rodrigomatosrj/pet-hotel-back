@@ -9,6 +9,14 @@ const User = require("../models/User");
 
 function configurePassport(app) {
 	app.use(passport.initialize());
+	app.use(passport.session());
+	passport.serializeUser(function (user, done) {
+		done(null, user);
+	});
+	passport.deserializeUser(function (user, done) {
+		done(null, user);
+	});
+
 	passport.use(
 		new LocalStrategy(
 			{ usernameField: "email", passwordField: "password" },

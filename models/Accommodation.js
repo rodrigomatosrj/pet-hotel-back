@@ -5,8 +5,7 @@ const AccommodationSchema = new Schema({
 	capacity: Number,
 	available: { type: Boolean, default: false },
 	value: { type: Number, required: true },
-	type: { type: String, enum: ["type1", "type2", "type3"] },
-	accommodation_id: { type: Schema.Types.ObjectId, ref: "Accommodation" },
+	type: { type: String, enum: ["standard", "suite","luxo"] }
 });
 
 const AccommodationModel = model("Accommodation", AccommodationSchema);

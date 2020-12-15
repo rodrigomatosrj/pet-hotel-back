@@ -1,0 +1,65 @@
+[
+	{
+		"name": "Pet Room",
+		"capacity": 4,
+		"available": true,
+		"value": 100,
+		"type": "standard"
+	},
+	{
+		"name": "Pet Room",
+		"capacity": 4,
+		"available": true,
+		"value": 100,
+		"type": "standard"
+	},
+	{
+		"name": "Pet Room",
+		"capacity": 4,
+		"available": true,
+		"value": 100,
+		"type": "standard"
+	},
+	{
+		"name": "Pet Room",
+		"capacity": 4,
+		"available": true,
+		"value": 100,
+		"type": "standard"
+	},
+	{
+		"name": "Pet Room",
+		"capacity": 4,
+		"available": true,
+		"value": 100,
+		"type": "standard"
+	},
+	{
+		"name": "Pet Suite",
+		"capacity": 2,
+		"available": true,
+		"value": 140,
+		"type": "suite"
+	},
+	{
+		"name": "Pet Suite",
+		"capacity": 2,
+		"available": true,
+		"value": 140,
+		"type": "suite"
+	},
+	{
+		"name": "Pet Suite",
+		"capacity": 2,
+		"available": true,
+		"value": 140,
+		"type": "suite"
+	},
+	{
+		"name": "Pet Luxury",
+		"capacity": 1,
+		"available": true,
+		"value": 250,
+		"type": "luxo"
+	}
+]
