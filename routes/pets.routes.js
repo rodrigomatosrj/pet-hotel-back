@@ -48,12 +48,12 @@ router.post(
 );
 
 router.patch(
-	"/",
+	"/:id",
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
 			const result = await Pet.findOneAndUpdate(
-				{ _id: req.body.id },
+				{ _id: req.params.id },
 				req.body,
 				{ new: true }
 			);
@@ -66,11 +66,11 @@ router.patch(
 );
 
 router.delete(
-	"/",
+	"/:id",
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			const result = await Pet.findOneAndDelete({ _id: req.body.id });
+			const result = await Pet.findOneAndDelete({ _id: req.params.id });
 			res.status(200).json({ message: "Pet delete sucessfully", pet: result });
 		} catch (err) {
 			console.error(err);
