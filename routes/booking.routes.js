@@ -3,6 +3,7 @@ const passport = require("passport");
 const querystring = require("querystring");
 
 const Booking = require("../models/Booking");
+const Accommodation = require("../models/Accommodation");
 
 router.get(
 	"/",
@@ -21,16 +22,32 @@ router.get(
 
 router.get(
 	"/search",
-	passport.authenticate("jwt", { session: false }),
+	//passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			const result = await Booking.find({
-				start_date: { gte: req.query.startDate },
-				end_date: { lte: req.query.endDate },
+			const startDate = new Date(req.query.startDate);
+			const endDate = new Date(req.query.endDate);
+
+			const reservedRooms = await Booking.find({
+				start_date: { $lt: startDate, $gt: endDate, $gt: new Date() },
+				end_date: { $lt: startDate, $gt: endDate, $gt: new Date() },
+			}).select({ _id: 0, accommodation_id: 1 });
+
+			// if (!reservedRooms) {
+			// 	const availableRooms = await Accommodation.find();
+			// } else {
+			// 	const availableRooms = await Accommodation.find({
+			// 		_id: { nin: reservedRooms },
+			// 	});
+			// }
+
+			const availableRooms = await Accommodation.find();
+
+
+			res.status(200).json({
+				message: "Avialable Rooms",
+				bookings: availableRooms,
 			});
-			res
-				.status(200)
-				.json({ message: "This is a protected route", bookings: result });
 		} catch (err) {
 			return res.status(500).json({ msg: err });
 		}

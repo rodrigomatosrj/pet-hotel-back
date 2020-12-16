@@ -3,19 +3,12 @@ const bcrypt = require("bcryptjs");
 const LocalStrategy = require("passport-local").Strategy;
 const JWTStrategy = require("passport-jwt").Strategy;
 const ExtractJWT = require("passport-jwt").ExtractJwt;
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const GoogleStrategy = require("passport-google-token").Strategy;
 
 const User = require("../models/User");
 
 function configurePassport(app) {
 	app.use(passport.initialize());
-	app.use(passport.session());
-	passport.serializeUser(function (user, done) {
-		done(null, user);
-	});
-	passport.deserializeUser(function (user, done) {
-		done(null, user);
-	});
 
 	passport.use(
 		new LocalStrategy(
@@ -63,8 +56,7 @@ function configurePassport(app) {
 		new GoogleStrategy(
 			{
 				clientID: process.env.GOOGLE_CLIENT_ID,
-				clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-				callbackURL: "/api/auth/google/callback",
+				clientSecret: process.env.GOOGLE_CLIENT_SECRET
 			},
 			async (accessToken, refreshToken, profile, done) => {
 				try {

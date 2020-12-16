@@ -4,11 +4,11 @@ const PetSchema = new Schema({
 	name: { type: String, required: true, unique: true },
 	animal: {
 		type: String,
-		enum: ["Rabbit", "Dog", "Cat", "Dinossaur"],
+		enum: ["Coelho", "Cachorro", "Gato", "Dinossauro"],
 		required: true,
 	},
-	size: { type: String, enum: ["Big", "Medium", "Small"] },
-	breed: { type: String, enum: ["Macho", "Fêmea"] },
+	size: { type: String, enum: ["Grande", "Médio", "Pequeno"] },
+	genre: { type: String, enum: ["Macho", "Fêmea"] },
 	helthy: {
 		allergy: [{ type: String }],
 		disease: [{ type: String }],
