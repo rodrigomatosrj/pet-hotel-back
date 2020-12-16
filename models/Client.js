@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const ClientSchema = new Schema({
-	name: { type: String, required: true, unique: true },
+	name: { type: String, required: true},
 	mobile: { type: String, required: true },
 	adress: {
 		street: { type: String, required: true },

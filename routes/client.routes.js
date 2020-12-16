@@ -24,7 +24,10 @@ router.post(
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			const result = await Client.create({...req.body, client_id: req.user._id});
+			const result = await Client.create({
+				...req.body,
+				user_id: req.user._id,
+			});
 			res
 				.status(200)
 				.json({ message: "Client added sucessfully", user: result });
@@ -35,13 +38,15 @@ router.post(
 	}
 );
 
-
 router.patch(
 	"/",
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			const result = await Client.findOneAndUpdate({user_id: req.user._id}, req.body);
+			const result = await Client.findOneAndUpdate(
+				{ user_id: req.user._id },
+				req.body
+			);
 			res
 				.status(200)
 				.json({ message: "Client edited sucessfully", user: result });

@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const PetSchema = new Schema({
-	name: { type: String, required: true, unique: true },
+	name: { type: String, required: true},
 	animal: {
 		type: String,
 		enum: ["Coelho", "Cachorro", "Gato", "Dinossauro"],
