@@ -112,7 +112,7 @@ router.delete(
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			const result = await Booking.findOneAndDelete({ _id: req.body.id });
+			const result = await Booking.findOneAndDelete({ _id: req.params.id });
 			res
 				.status(200)
 				.json({ message: "Pet delete sucessfully", booking: result });
