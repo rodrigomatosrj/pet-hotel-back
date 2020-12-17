@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+const Payment = require("../models/Payment");
 
 router.post(
 	"/",
