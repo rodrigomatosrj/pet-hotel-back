@@ -43,7 +43,6 @@ router.get(
 
 			const availableRooms = await Accommodation.find();
 
-
 			res.status(200).json({
 				message: "Avialable Rooms",
 				bookings: availableRooms,
@@ -59,7 +58,7 @@ router.get(
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			const result = await Booking.find({ _id: req.params.id });
+			const result = await Booking.findOne({ _id: req.params.id });
 			res
 				.status(200)
 				.json({ message: "This is a protected route", booking: result });
@@ -109,7 +108,7 @@ router.put(
 );
 
 router.delete(
-	"/",
+	"/:id",
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
