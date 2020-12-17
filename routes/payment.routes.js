@@ -8,12 +8,13 @@ router.post(
 	passport.authenticate("jwt", { session: false }),
 	async (req, res) => {
 		try {
-			await Payment.create({ user_id: req.user._id }, req.body);
-			await Booking.findOneAndUpdate(
+			
+			setTimeout(() => {
+				await Payment.create({ user_id: req.user._id }, req.body);
+				await Booking.findOneAndUpdate(
 				{ _id: req.body.booking_id },
 				{ payment: true }
 			);
-			setTimeout(() => {
 				res.status(200).json({ message: "Payment received sucessfully!!!" });
 			}, 6000);
 		} catch (err) {
