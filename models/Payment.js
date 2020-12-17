@@ -10,6 +10,6 @@ const UserSchema = new Schema({
 	value: Number
 });
 
-const UserModel = model("User", UserSchema);
+const PaymentModel = model("Payment", UserSchema);
 
 module.exports = UserModel;
