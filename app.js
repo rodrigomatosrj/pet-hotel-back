@@ -36,6 +36,9 @@ app.use("/api/pet", petsRouter);
 const bookingRouter = require("./routes/booking.routes");
 app.use("/api/booking", bookingRouter);
 
+const paymentRouter = require("./routes/payment.routes");
+app.use("/api/payment", paymentRouter);
+
 const authRouter = require("./routes/auth.routes");
 app.use("/api/auth", authRouter);
 
